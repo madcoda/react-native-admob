@@ -29,6 +29,11 @@ static NSString *const kEventAdLeftApplication = @"interstitialAdLeftApplication
     return dispatch_get_main_queue();
 }
 
++ (BOOL)requiresMainQueueSetup
+{
+    return NO;
+}
+
 RCT_EXPORT_MODULE();
 
 - (NSArray<NSString *> *)supportedEvents
@@ -73,7 +78,7 @@ RCT_EXPORT_METHOD(requestAd:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromise
 
         DFPRequest *request = [DFPRequest request];
         request.testDevices = _testDevices;
-        
+
         if (_customTargeting != nil) {
             if (_customTargeting.count > 0) {
                 request.customTargeting = _customTargeting;
